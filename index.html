@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="So tay on thi Xu ly tin hieu so cho he thong co dien tu (ME4083): 24 dang bai, quy trinh giai va so lieu tu cac bai tap da lam.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="So tay on thi DSP">
+<meta property="og:description" content="So tay on thi Xu ly tin hieu so cho he thong co dien tu (ME4083): 24 dang bai, quy trinh giai va so lieu tu cac bai tap da lam.">
+<meta property="og:type" content="article">
+<title>Sổ tay ôn thi DSP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: một cột đọc dọc; dải "vết sóng" teal làm điểm nhấn duy nhất, bảng rộng cuộn ngang trong khung riêng */
+:root{
+  --bg:#f6f8f9; --surface:#ffffff; --surface-2:#fbfcfd;
+  --ink:#16202b; --muted:#5c6b7a; --line:#dde4ea;
+  --accent:#0f766e; --accent-soft:#e8f4f2;
+  --key:#8a5a00; --key-soft:#fdf6e7;
+  --warn:#a63c10; --warn-soft:#fdeee7;
+  --idea:#3f4bb8; --idea-soft:#eceefb;
+  --font-head:"Be Vietnam Pro",system-ui,"Segoe UI",sans-serif;
+  --font-body:"Inter",system-ui,"Segoe UI",Roboto,sans-serif;
+  --font-math:"Cambria","Georgia","Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1319; --surface:#141d25; --surface-2:#18222b;
+  --ink:#e7eef4; --muted:#9aabb9; --line:#26333e;
+  --accent:#4fd1c5; --accent-soft:#102c2a;
+  --key:#e7b94e; --key-soft:#282215;
+  --warn:#ff9f74; --warn-soft:#2c1a12;
+  --idea:#9aa4f2; --idea-soft:#1b1d33;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1319; --surface:#141d25; --surface-2:#18222b;
+  --ink:#e7eef4; --muted:#9aabb9; --line:#26333e;
+  --accent:#4fd1c5; --accent-soft:#102c2a;
+  --key:#e7b94e; --key-soft:#282215;
+  --warn:#ff9f74; --warn-soft:#2c1a12;
+  --idea:#9aa4f2; --idea-soft:#1b1d33;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15.5px;line-height:1.68;margin:0}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.hero{background:linear-gradient(135deg,#10242c 0%,#143b3b 100%);color:#eaf4f2;border-radius:0 0 20px 20px;margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 2.4rem);padding-bottom:2rem}
+.hero-in{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero .eyebrow{font-family:var(--font-head);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#6fd3c4;margin:0 0 .5rem}
+.hero h1{font-family:var(--font-head);font-weight:700;font-size:clamp(1.6rem,4.4vw,2.2rem);line-height:1.18;margin:0 0 .5rem;text-wrap:balance}
+.hero p{color:#b9d3cf;margin:.3rem 0;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.chips span{font-size:.78rem;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:.18rem .7rem;color:#d8ebe7}
+section{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.25rem;margin:1.1rem 0}
+h2{font-family:var(--font-head);font-weight:600;font-size:1.22rem;margin:0 0 .2rem;text-wrap:balance}
+h2 .ix{color:var(--accent);font-weight:700;margin-right:.45rem}
+.rule{height:2px;background:linear-gradient(90deg,var(--accent),transparent);border-radius:2px;margin:.55rem 0 1rem}
+h3{font-family:var(--font-head);font-weight:600;font-size:1.02rem;color:var(--accent);margin:1.5rem 0 .4rem}
+h4{font-family:var(--font-head);font-weight:600;font-size:.93rem;margin:0 0 .3rem}
+p{margin:.5rem 0;max-width:72ch}
+.lead{color:var(--muted);max-width:72ch}
+.m{font-family:var(--font-math);font-style:italic}
+.m sub,.m sup{font-style:normal}
+.eq{font-family:var(--font-math);font-style:italic;text-align:center;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:.6rem .8rem;margin:.7rem 0;overflow-x:auto;font-size:1.03rem}
+.eq sub,.eq sup{font-style:normal}
+.box{border-radius:10px;padding:.65rem .85rem;margin:.75rem 0;font-size:.95rem;border-left:3px solid}
+.box p{margin:.3rem 0}
+.key{background:var(--key-soft);border-color:var(--key)}
+.key b:first-child{color:var(--key)}
+.warn{background:var(--warn-soft);border-color:var(--warn)}
+.warn b:first-child{color:var(--warn)}
+.tip{background:var(--accent-soft);border-color:var(--accent)}
+.tip b:first-child{color:var(--accent)}
+.idea{background:var(--idea-soft);border-color:var(--idea)}
+.idea b:first-child{color:var(--idea)}
+.scroll{overflow-x:auto;margin:.7rem 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:540px;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:.42rem .6rem;text-align:left;vertical-align:top}
+th:last-child,td:last-child{border-right:none}
+tr:last-child td{border-bottom:none}
+th{background:var(--surface-2);font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--muted);position:sticky;top:0}
+td.yes{color:var(--accent);font-weight:600;text-align:center}
+td.no{color:var(--warn);font-weight:600;text-align:center}
+ol.steps,ul.tight{margin:.4rem 0 .4rem 1.15rem;padding:0}
+ol.steps li,ul.tight li{margin:.3rem 0;max-width:70ch}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.7rem;margin:.7rem 0}
+.cell{border:1px solid var(--line);border-radius:10px;padding:.65rem .8rem;min-width:0}
+.cell h4{color:var(--accent)}
+code,.fname{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:.84em;background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:.05rem .35rem}
+details{border:1px solid var(--line);border-radius:10px;padding:.55rem .85rem;margin:.45rem 0;background:var(--surface-2)}
+details[open]{background:var(--surface)}
+summary{cursor:pointer;font-weight:600;font-family:var(--font-head);font-size:.93rem}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+details>p{margin:.5rem 0 .1rem;font-size:.93rem}
+.tag{font-family:var(--font-body);font-size:.72rem;font-weight:500;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:.1rem .6rem;vertical-align:middle;margin-left:.4rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="hero"><div class="hero-in">
+<p class="eyebrow">ME4083 · Xử lý tín hiệu số cho hệ thống cơ điện tử</p>
+<h1>Sổ tay ôn thi — 24 dạng bài đã làm</h1>
+<p>Rút từ 7 bài tập đã nộp của học kỳ. Mỗi dạng gồm ba phần: <b>nhận dạng đề</b> → <b>quy trình các bước</b> → <b>số liệu thật</b> của chính bài mình đã giải để đối chiếu.</p>
+<div class="chips"><span>A · Lấy mẫu &amp; tái tạo</span><span>B · Tín hiệu rời rạc</span><span>C · Tính chất hệ</span><span>D · Chập &amp; LCCDE</span><span>E · Đáp ứng tần số</span><span>F · Biến đổi Z</span></div>
+</div></div>
+
+<div class="wrap">
+
+<section>
+<h2>Bản đồ dạng bài</h2><div class="rule"></div>
+<p class="lead">Đọc cột giữa trước: đề thi hầu như luôn dùng đúng những cách hỏi này. Nhận ra dạng rồi mới chạy quy trình.</p>
+<div class="scroll"><table>
+<tr><th style="width:11%">Cụm</th><th style="width:31%">Dạng bài</th><th style="width:32%">Nhận dạng đề</th><th style="width:26%">Bài đã làm</th></tr>
+<tr><td rowspan="4"><b>A</b></td><td>A1 · Nyquist nhiều thành phần</td><td>cho <span class="m">x(t)</span> tổng nhiều cos, hỏi <span class="m">f<sub>s,min</sub></span></td><td rowspan="2"><span class="fname">BaiTap_LayMau_TaiTao</span></td></tr>
+<tr><td>A2 · Tính tần số alias</td><td>cho <span class="m">f &gt; f<sub>s</sub>/2</span>, hỏi “trông như tần nào”</td></tr>
+<tr><td>A3 · Tái tạo qua LPF lý tưởng</td><td>hỏi <span class="m">x<sub>r</sub>(t)</span>, có bằng <span class="m">x(t)</span> không</td><td><span class="fname">DSP_BaiTap_DAC</span></td></tr>
+<tr><td>A4 · DAC: LSB, mã D, số bit</td><td>có <span class="m">V<sub>ref</sub></span>, <span class="m">N</span> bit, đơn vị vật lý</td><td><span class="fname">BaiTap_DA_NguyenLy</span></td></tr>
+
+<tr><td rowspan="3"><b>B</b></td><td>B1 · <span class="m">x(t)→x[n]</span>, chu kỳ <span class="m">N</span></td><td>“viết <span class="m">x[n]</span>”, “có tuần hoàn không”</td><td rowspan="3"><span class="fname">BaiTap_Ch1</span></td></tr>
+<tr><td>B2 · Phân tích theo <span class="m">δ[n−k]</span></td><td>cho dãy có mẫu gạch dưới</td></tr>
+<tr><td>B3 · Dịch, lật, cắt dãy</td><td>“xác định và vẽ <span class="m">x[1−n]</span>”</td></tr>
+
+<tr><td rowspan="5"><b>C</b></td><td>C1 · Bảng 6 tính chất</td><td>bảng trống điền ✓/✗</td><td><span class="fname">BaiTap_DSP_Ch1_Phan05</span></td></tr>
+<tr><td>C2 · Chứng minh / phản ví dụ</td><td>“chứng minh, hoặc nêu phản ví dụ”</td><td><span class="fname">BaiTap_PhanA_Tung_tinh_chat</span></td></tr>
+<tr><td>C3 · Khả nghịch &amp; hệ ngược</td><td>sai phân lùi, encoder homing</td><td rowspan="3"><span class="fname">Phan05 · câu 3–4</span></td></tr>
+<tr><td>C4 · Thụ động &amp; năng lượng</td><td>so <span class="m">E<sub>y</sub></span> với <span class="m">E<sub>x</sub></span></td></tr>
+<tr><td>C5 · Phi tuyến firmware (windup)</td><td>bão hòa, anti-windup, đổi thứ tự khối</td></tr>
+
+<tr><td rowspan="5"><b>D</b></td><td>D1 · Tích chập FIR + kiểm tra tổng</td><td>cho <span class="m">h</span>, <span class="m">x</span> hữu hạn, “lập bảng”</td><td><span class="fname">BaiTap_Ch1 · bài 4</span></td></tr>
+<tr><td>D2 · LCCDE → sơ đồ khối + đệ quy</td><td>“bậc N, M”, “Direct Form I”</td><td rowspan="4"><span class="fname">BaiTap_LCCDE</span></td></tr>
+<tr><td>D3 · Cổ điển: thuần nhất + riêng</td><td>có <span class="m">y[−1]</span>, <span class="m">y[−2]</span> khác 0</td></tr>
+<tr><td>D4 · Zero-input / zero-state</td><td>“đáp ứng zero-input”</td></tr>
+<tr><td>D5 · <span class="m">h[n]</span> nghiệm phức, mode trùng input</td><td><span class="m">λ</span> phức; input <span class="m">= λ<sup>n</sup></span></td></tr>
+
+<tr><td rowspan="3"><b>E</b></td><td>E1 · Đáp ứng với sin</td><td>“biên độ và pha tại <span class="m">f</span>”</td><td rowspan="3"><span class="fname">DSP_Ch2_TomTat</span></td></tr>
+<tr><td>E2 · Trung bình trượt M</td><td>“triệt tần nào”, “trễ bao nhiêu”</td></tr>
+<tr><td>E3 · Trễ pha vs trễ nhóm</td><td><span class="m">|H| = 1</span> mà hỏi có méo không</td></tr>
+
+<tr><td rowspan="4"><b>F</b></td><td>F1 · <span class="m">H(z)</span>, cực/zero, ROC, ổn định</td><td>“ghi rõ ROC”, “nhân quả không”</td><td rowspan="4"><span class="fname">BaiTap_ZTransform_Ch2</span></td></tr>
+<tr><td>F2 · PFE tìm đáp ứng bước / xung</td><td>“dùng PFE”, “sau bao nhiêu mẫu”</td></tr>
+<tr><td>F3 · <span class="m">z = e<sup>sT</sup></span> và thiết kế notch</td><td><span class="m">f<sub>0</sub></span>, <span class="m">ζ</span> → bán kính, góc, <span class="m">b</span>, <span class="m">a</span></td></tr>
+<tr><td>F4 · Cực tại <span class="m">z = 1</span> và cực lặp</td><td>khâu tích phân, đáp ứng dốc</td></tr>
+</table></div>
+<div class="box tip"><b>Về cột cuối:</b> đó là tên file bài giải nằm trên máy, trong thư mục <span class="fname">Signal processing for mechetronic systems</span> — bản web này không mở được file local, mở từ máy để xem lại cách trình bày.</div>
+</section>
+
+<section id="A">
+<h2><span class="ix">A</span>Lấy mẫu &amp; tái tạo<span class="tag">ADC · DAC · alias</span></h2><div class="rule"></div>
+<p><b>Ví von:</b> lấy mẫu như chụp ảnh cánh quạt. Chụp đủ nhanh thì thấy đúng chiều quay; chụp chậm quá thì quạt “quay ngược” — và không ảnh nào sửa được sau khi đã chụp.</p>
+
+<h3>A1 · Nyquist cho tín hiệu nhiều thành phần</h3>
+<ol class="steps">
+<li>Liệt kê mọi tần số trong <span class="m">x(t)</span>, lấy <span class="m">f<sub>max</sub></span>. Phổ vạch thì chỉ cần vạch cao nhất.</li>
+<li><span class="m">f<sub>s,min</sub> = 2f<sub>max</sub></span>, dấu lớn hơn nghiêm ngặt. Thực tế chọn <span class="m">2,5–2,56 f<sub>max</sub></span> để chừa dốc lọc.</li>
+<li><span class="m">T<sub>s,max</sub> = 1/f<sub>s,min</sub></span>.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">x = 3cos(2π·800t) + 2sin(2π·1500t) + cos(2π·2200t + π/4)</span> → <span class="m">f<sub>max</sub> = 2200</span> Hz → <span class="m">f<sub>s,min</sub> = 4400</span> Hz, <span class="m">T<sub>s,max</sub> = 227,3 µs</span>. Biên độ và pha <b>không ảnh hưởng</b> Nyquist.</div>
+
+<h3>A2 · Tần số alias</h3>
+<div class="grid2">
+<div class="cell"><h4>Đường tần số</h4>
+<div class="eq">f<sub>a</sub> = |f<sub>0</sub> − k f<sub>s</sub>|,&nbsp;&nbsp; k = round(f<sub>0</sub>/f<sub>s</sub>)</div>
+<p>Kết quả luôn rơi vào <span class="m">[0, f<sub>s</sub>/2]</span>.</p></div>
+<div class="cell"><h4>Đường tần số số</h4>
+<p><span class="m">ω<sub>0</sub> = 2πf<sub>0</sub>/f<sub>s</sub></span>, trừ bội <span class="m">2π</span> để đưa về <span class="m">[−π, π]</span>, rồi <span class="m">f<sub>a</sub> = |ω<sub>0</sub>|f<sub>s</sub>/2π</span>. Dùng <span class="m">cos(−θ) = cos θ</span> để bỏ dấu âm.</p></div>
+</div>
+<div class="box key"><b>Số đã làm:</b> <span class="m">f<sub>0</sub> = 7000</span>, <span class="m">f<sub>s</sub> = 5000</span>: <span class="m">ω<sub>0</sub> = 2,8π → 0,8π</span> → <b>2000 Hz</b>. Và <span class="m">f<sub>0</sub> = 6000</span>, <span class="m">f<sub>s</sub> = 8000</span>: <span class="m">1,5π → −0,5π</span> → <b>2000 Hz</b>. Và 50 Hz lấy mẫu 80 Hz → <b>30 Hz</b>.</div>
+<div class="box warn"><b>Bẫy:</b> với <b>sin</b> thì alias có thể đảo dấu pha (<span class="m">sin(−θ) = −sin θ</span>), với <b>cos</b> thì không. Đề hay cho cos để tránh rắc rối — gặp sin phải ghi rõ dấu.</div>
+
+<h3>A3 · Tái tạo bằng LPF lý tưởng</h3>
+<ol class="steps">
+<li><span class="m">f<sub>c</sub> = f<sub>s</sub>/2</span>.</li>
+<li>Phân loại từng thành phần: <span class="m">f &lt; f<sub>s</sub>/2</span> giữ nguyên; <span class="m">f &gt; f<sub>s</sub>/2</span> <b>đã</b> biến thành <span class="m">f<sub>a</sub></span> ngay lúc lấy mẫu.</li>
+<li>Viết <span class="m">x<sub>r</sub>(t)</span> gồm thành phần hợp lệ cộng thành phần giả ở <span class="m">f<sub>a</sub></span>, giữ nguyên biên độ.</li>
+<li>Kết luận <span class="m">x<sub>r</sub> ≠ x</span> và nêu hai cách khắc phục: lọc anti-alias analog <b>trước</b> ADC, hoặc tăng <span class="m">f<sub>s</sub></span>.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">x = 2cos(2π·1000t) + cos(2π·3500t) + 0,5cos(2π·6000t)</span>, <span class="m">f<sub>s</sub> = 8</span> kHz → <span class="m">x<sub>r</sub> = 2cos(2π·1000t) + cos(2π·3500t) + 0,5cos(2π·2000t)</span>. Thành phần 6 kHz hiện thành 2 kHz, nằm trong dải hợp lệ nên <b>không lọc ra được nữa</b>.</div>
+
+<h3>A4 · DAC: độ phân giải, mã, số bit</h3>
+<ol class="steps">
+<li>LSB điện áp <span class="m">Δ = V<sub>ref</sub>/2<sup>N</sup></span>.</li>
+<li>Quy sang đơn vị vật lý qua hệ số <span class="m">k</span>: <span class="m">Δ<sub>n</sub> = kΔ</span>.</li>
+<li>Mã <span class="m">D = round(V·2<sup>N</sup>/V<sub>ref</sub>)</span>; điện áp thực <span class="m">V<sub>out</sub> = V<sub>ref</sub>D/2<sup>N</sup></span>; sai số <span class="m">|e| ≤ Δ/2</span>.</li>
+<li>Số bit tối thiểu cho bước <span class="m">≤ ε</span>: <span class="m">2<sup>N</sup> ≥ </span>toàn thang<span class="m">/ε</span>, làm tròn <b>lên</b>.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">N = 8</span>, <span class="m">V<sub>ref</sub> = 5</span> V, 600 v/p mỗi V → <span class="m">Δ = 19,5</span> mV = 11,7 vòng/phút. Đặt 1800 v/p → <span class="m">V = 3</span> V → <span class="m">D = 153,6 → 154</span> → 1804,7 v/p, sai số +4,7 (nhỏ hơn <span class="m">Δ/2 = 5,9</span>) ✓. Muốn bước ≤ 1 v/p: <span class="m">2<sup>N</sup> ≥ 3000 → N = 12</span> bit.</div>
+<div class="box tip"><b>ZOH và lọc tái tạo:</b> DAC giữ bậc 0 nên phổ ra có <span class="m">f<sub>0</sub></span> và các ảnh <span class="m">|kf<sub>s</sub> ± f<sub>0</sub>|</span>. Chọn tần cắt sao cho <span class="m">f<sub>0</sub> &lt; f<sub>c</sub> &lt; f<sub>s</sub> − f<sub>0</sub></span>. Số đã làm: <span class="m">f<sub>0</sub> = 50</span> Hz, <span class="m">f<sub>s</sub> = 1</span> kHz → ảnh gần nhất 950 Hz → chọn <span class="m">f<sub>c</sub> = 500</span> Hz. Một chu kỳ 20 ms chứa 20 mẫu.</div>
+</section>
+
+<section id="B">
+<h2><span class="ix">B</span>Tín hiệu rời rạc<span class="tag">dãy · biến đổi biến</span></h2><div class="rule"></div>
+
+<h3>B1 · Từ <span class="m">x(t)</span> sang <span class="m">x[n]</span>, tần số số, chu kỳ</h3>
+<ol class="steps">
+<li>Thay <span class="m">t = nT = n/f<sub>s</sub></span>: <span class="m">ω<sub>0</sub> = 2πf<sub>0</sub>/f<sub>s</sub></span> [rad/mẫu], <span class="m">f = f<sub>0</sub>/f<sub>s</sub></span> [chuẩn hóa].</li>
+<li>Tuần hoàn khi và chỉ khi <span class="m">f<sub>0</sub>/f<sub>s</sub></span> <b>hữu tỉ</b>. Viết tối giản <span class="m">k/N</span> → chu kỳ là <span class="m">N</span>.</li>
+<li>Nhiều thành phần: <span class="m">N = BCNN(N<sub>1</sub>, N<sub>2</sub>, …)</span>.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> 300 Hz @ 2 kHz → <span class="m">ω<sub>0</sub> = 0,3π</span>, <span class="m">3/20</span> → <span class="m">N = 20</span>. Và 150 Hz + 450 Hz @ 1 kHz → <span class="m">0,3π</span> và <span class="m">0,9π</span> → cùng <span class="m">N = 20</span>.</div>
+<div class="box warn"><b>Bẫy:</b> <span class="m">x(t)</span> luôn tuần hoàn nhưng <span class="m">x[n]</span> <b>có thể không</b> — ví dụ <span class="m">ω<sub>0</sub> = 1</span> rad/mẫu thì <span class="m">1/2π</span> vô tỉ. Phải kiểm tra tính hữu tỉ, đừng mặc định.</div>
+
+<h3>B2 · Phân tích theo xung đơn vị</h3>
+<p>Mỗi mẫu là một <span class="m">δ</span> có trọng số: <span class="m">x[n] = Σ<sub>k</sub> x[k]δ[n−k]</span>. Đọc đúng mốc <span class="m">n = 0</span> (mẫu in đậm hoặc gạch dưới trong đề).</p>
+<div class="box key"><b>Số đã làm:</b> <span class="m">x = {1, 2, 3, −1}</span> tại <span class="m">n = −1…2</span> → <span class="m">x[n] = δ[n+1] + 2δ[n] + 3δ[n−1] − δ[n−2]</span>.</div>
+
+<h3>B3 · Dịch, lật, cắt</h3>
+<div class="scroll"><table>
+<tr><th style="width:22%">Biểu thức</th><th style="width:40%">Làm theo thứ tự</th><th>Kết quả bài đã làm</th></tr>
+<tr><td><span class="m">x[n−n<sub>0</sub>]</span></td><td>dịch <b>phải</b> <span class="m">n<sub>0</sub></span></td><td>—</td></tr>
+<tr><td><span class="m">x[−n]</span></td><td>lật quanh <span class="m">n = 0</span></td><td>—</td></tr>
+<tr><td><span class="m">x[1−n]</span></td><td>lật trước, rồi dịch phải 1</td><td><span class="m">y<sub>1</sub>[−1] = −1, y<sub>1</sub>[0] = 3, y<sub>1</sub>[1] = 2, y<sub>1</sub>[2] = 1</span></td></tr>
+<tr><td><span class="m">x[n+1]u[n]</span></td><td>dịch <b>trái</b> 1, rồi cắt bỏ <span class="m">n &lt; 0</span></td><td><span class="m">y<sub>2</sub>[0] = 3, y<sub>2</sub>[1] = −1</span></td></tr>
+</table></div>
+<div class="box tip"><b>Mẹo không nhầm chiều:</b> đừng suy luận “cộng là trái hay phải”, hãy <b>thế vài giá trị n cụ thể</b>: <span class="m">y[0] = x[1−0] = x[1]</span>. Ba giá trị là đủ dựng cả dãy.</div>
+</section>
+
+<section id="C">
+<h2><span class="ix">C</span>Tính chất hệ thống<span class="tag">L · TI · C · S · M · I</span></h2><div class="rule"></div>
+<p><b>Ví von:</b> sáu tính chất là sáu câu hỏi kiểm tra cố định. Đề không hỏi “hệ này thế nào”, mà hỏi đúng sáu câu đó — thuộc câu hỏi là xong nửa bài.</p>
+
+<h3>C1 · Sáu câu hỏi kiểm tra</h3>
+<div class="scroll"><table>
+<tr><th style="width:20%">Tính chất</th><th style="width:48%">Câu hỏi</th><th>Cách bác bỏ nhanh</th></tr>
+<tr><td><b>L</b> Tuyến tính</td><td><span class="m">T{a<sub>1</sub>x<sub>1</sub> + a<sub>2</sub>x<sub>2</sub>} = a<sub>1</sub>y<sub>1</sub> + a<sub>2</sub>y<sub>2</sub></span> với mọi <span class="m">x, a</span>?</td><td>thử <span class="m">x = 0</span>, hoặc nhân đôi input</td></tr>
+<tr><td><b>TI</b> Bất biến</td><td>3 bước: (1) dịch input rồi tính; (2) dịch output gốc; (3) so sánh</td><td><span class="m">x = δ[n]</span> so với <span class="m">δ[n−1]</span></td></tr>
+<tr><td><b>C</b> Nhân quả</td><td><span class="m">y[n<sub>0</sub>]</span> chỉ dùng <span class="m">x[n]</span> với <span class="m">n ≤ n<sub>0</sub></span>?</td><td>chỉ ra một <span class="m">n<sub>0</sub></span> cần mẫu tương lai</td></tr>
+<tr><td><b>S</b> Ổn định BIBO</td><td>mọi <span class="m">|x| ≤ B<sub>x</sub></span> cho <span class="m">|y| ≤ B<sub>y</sub> &lt; ∞</span>?</td><td>thử <span class="m">x = u[n]</span> hoặc <span class="m">x = 1</span></td></tr>
+<tr><td><b>M</b> Không nhớ</td><td><span class="m">y[n]</span> chỉ dùng <span class="m">x[n]</span> cùng thời điểm?</td><td>thấy <span class="m">x[n−1]</span> là có nhớ</td></tr>
+<tr><td><b>I</b> Khả nghịch</td><td>từ <span class="m">y</span> khôi phục <b>duy nhất</b> <span class="m">x</span>?</td><td>tìm hai input khác nhau cho cùng output</td></tr>
+</table></div>
+<div class="box warn"><b>Quy tắc trình bày:</b> kết luận <b>✓ phải có lập luận</b> tổng quát (phép thế hoặc bất đẳng thức); kết luận <b>✗ phải có phản ví dụ bằng số cụ thể</b> — nêu rõ tín hiệu, <span class="m">n<sub>0</sub></span>, và giá trị hai vế. Nói suông bị trừ điểm.</div>
+
+<h3>C2 · Thư viện 15 ca đã gặp</h3>
+<div class="scroll"><table>
+<tr><th style="width:21%">Hệ</th><th>L</th><th>TI</th><th>C</th><th>S</th><th>M</th><th>I</th><th style="width:38%">Chỗ dễ sai</th></tr>
+<tr><td><span class="m">3x[n−2]</span></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td>LTI chuẩn</td></tr>
+<tr><td><span class="m">x[n] + 0,5</span></td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td>hằng số phá xếp chồng: <span class="m">x = 0 → y = 0,5</span></td></tr>
+<tr><td><span class="m">n·x[n]</span></td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td><b>tuyến tính nhưng không TI</b>; <span class="m">x = u → y = n</span> vô biên</td></tr>
+<tr><td><span class="m">x[n]x[n−1]</span></td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td>tích hai mẫu → bậc 2</td></tr>
+<tr><td><span class="m">cos(ω<sub>0</sub>n)x[n]</span></td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td>nhân dãy xác định: L giữ, TI mất</td></tr>
+<tr><td><span class="m">e<sup>x[n]</sup></span></td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td><span class="m">x = 0 → y = 1</span>; nhưng đơn ánh nên khả nghịch</td></tr>
+<tr><td><span class="m">med{x[n−1], x[n], x[n+1]}</span></td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td>trung vị phi tuyến; cần <span class="m">x[n+1]</span></td></tr>
+<tr><td><span class="m">sat<sub>U</sub>(x[n])</span></td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td>bão hòa: <span class="m">2U</span> và <span class="m">3U</span> cùng ra <span class="m">U</span></td></tr>
+<tr><td><span class="m">x[−n]</span></td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td><span class="m">n<sub>0</sub> = −1</span> cần <span class="m">x[1]</span></td></tr>
+<tr><td><span class="m">x[2n]</span></td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td>giảm mẫu: mất mẫu lẻ</td></tr>
+<tr><td><span class="m">x[n]u[n]</span></td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td><span class="m">u[n]</span> gắn mốc thời gian tuyệt đối</td></tr>
+<tr><td><span class="m">1/x[n]</span></td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td><span class="m">x = 1/(|n|+1)</span> bị chặn mà <span class="m">y → ∞</span></td></tr>
+<tr><td><span class="m">Σ<sub>k≤n</sub> x[k]</span></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td>tích lũy: <span class="m">x = u → y = n+1</span></td></tr>
+<tr><td><span class="m">(1/(n+1))Σ<sub>0</sub><sup>n</sup> x[k]</span></td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td>—</td><td><b>ổn định</b> nhờ chia <span class="m">n+1</span>, nhưng mốc <span class="m">n = 0</span> phá TI</td></tr>
+<tr><td><span class="m">x[2⌊n/2⌋]</span></td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td>biến thiên <b>tuần hoàn chu kỳ 2</b>: TI với <span class="m">n<sub>0</sub> = 2</span>, không TI với <span class="m">n<sub>0</sub> = 1</span></td></tr>
+</table></div>
+<div class="box idea"><b>Hai cặp dễ lẫn nhất:</b>
+<p>① <b>Tuyến tính ≠ bất biến.</b> <span class="m">n·x[n]</span>, <span class="m">cos(ω<sub>0</sub>n)x[n]</span>, <span class="m">x[n]u[n]</span> đều tuyến tính mà không bất biến — hệ số thay đổi theo <span class="m">n</span> nhưng vẫn cộng tính.</p>
+<p>② <b>Tích lũy vs trung bình tích lũy.</b> Cùng cộng dồn, nhưng <span class="m">1/(n+1)</span> kéo <span class="m">|y| ≤ B<sub>x</sub></span> nên ổn định; đổi lại hệ số gắn với thời gian tuyệt đối nên mất TI.</p></div>
+
+<h3>C3 · Khả nghịch &amp; hệ ngược</h3>
+<ol class="steps">
+<li>Thử tìm hai input khác nhau cho cùng output. Sai phân lùi <span class="m">v[n] = x[n] − x[n−1]</span>: <span class="m">x</span> và <span class="m">x + C</span> cho cùng <span class="m">v</span> → <b>không khả nghịch</b>.</li>
+<li>Nếu đề <b>thu hẹp miền</b> (<span class="m">x[n] = 0, n &lt; 0</span>) thì có hệ ngược: <span class="m">x̂[n] = Σ<sub>k=0</sub><sup>n</sup> v[k]</span>.</li>
+<li>Kiểm tra hai chiều bằng tổng rút gọn: <span class="m">Σ<sub>k=0</sub><sup>n</sup>(x[k] − x[k−1]) = x[n] − x[−1] = x[n]</span> ✓.</li>
+</ol>
+<div class="box tip"><b>Liên hệ thực tế:</b> encoder <b>tương đối</b> chỉ đo độ thay đổi nên mất hằng số <span class="m">C</span> = vị trí tuyệt đối — đúng lý do phải <b>homing</b> khi khởi động.</div>
+
+<h3>C4 · Thụ động &amp; năng lượng</h3>
+<p>Thụ động khi và chỉ khi <span class="m">E<sub>y</sub> ≤ E<sub>x</sub></span> với mọi input năng lượng hữu hạn.</p>
+<div class="grid2">
+<div class="cell"><h4>Sai phân: KHÔNG thụ động</h4>
+<p><span class="m">x = δ</span>: <span class="m">E<sub>x</sub> = 1</span>, <span class="m">v = δ[n] − δ[n−1]</span>, <span class="m">E<sub>v</sub> = 2</span>.</p>
+<p><span class="m">x = (−1)<sup>n</sup></span>: <span class="m">v = 2(−1)<sup>n</sup></span> — <b>khuếch đại 2 lần</b>.</p>
+<p>Nhiễu lượng tử encoder nằm gần <span class="m">f<sub>s</sub>/2</span> nên bị nhân đôi: vận tốc từ encoder <b>bắt buộc phải lọc thông thấp</b>.</p></div>
+<div class="cell"><h4>Trung bình 2 điểm: thụ động</h4>
+<p>Dùng <span class="m">(a+b)<sup>2</sup> ≤ 2(a<sup>2</sup> + b<sup>2</sup>)</span>:</p>
+<div class="eq">E<sub>y</sub> = ¼ Σ(x[n] + x[n−1])<sup>2</sup> ≤ ½(E<sub>x</sub> + E<sub>x</sub>) = E<sub>x</sub></div></div>
+</div>
+
+<h3>C5 · Phi tuyến trong firmware: windup</h3>
+<ol class="steps">
+<li>Tách <b>quan hệ vào–ra</b> và <b>biến nội</b>: bản A có <span class="m">u = sat(I)</span> nên <span class="m">|u| ≤ U</span> → <b>BIBO ổn định</b>, nhưng <span class="m">I[n]</span> vẫn vô biên.</li>
+<li>Chạy số theo hai giai đoạn để tìm thời điểm thoát bão hòa.</li>
+<li>Phi tuyến thì <b>thứ tự ghép nối tiếp không hoán vị được</b> — giao hoán chỉ đúng khi cả hai khối LTI.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">e = 2</span> (n = 0…9) rồi <span class="m">e = −1</span>: bản A không anti-windup có <span class="m">I[9] = 20</span>, phải xả 19 mẫu, <span class="m">u &lt; 1</span> lần đầu tại <b>n = 29</b>. Bản B kẹp giữ <span class="m">I</span> ở 1, <span class="m">u &lt; 1</span> ngay tại <b>n = 10</b>. Đổi thứ tự với <span class="m">e = 2δ[n] − δ[n−1]</span>: A ra <span class="m">u[n]</span>, còn bão hòa trước rồi tích phân ra <span class="m">δ[n]</span> — <b>khác nhau</b>.</div>
+</section>
+
+<section id="D">
+<h2><span class="ix">D</span>Tích chập &amp; phương trình sai phân<span class="tag">FIR · IIR · LCCDE</span></h2><div class="rule"></div>
+
+<h3>D1 · Tích chập FIR</h3>
+<ol class="steps">
+<li>Độ dài kết quả <span class="m">= N<sub>x</sub> + N<sub>h</sub> − 1</span>; mốc đầu bằng tổng hai mốc đầu.</li>
+<li>Lập bảng: mỗi hàng là <span class="m">x[k]h[n−k]</span>, cộng theo cột.</li>
+<li><b>Luôn kiểm tra</b> <span class="m">Σy = (Σx)(Σh)</span> — đây chính là <span class="m">Y(1) = X(1)H(1)</span>, bắt lỗi cộng nhầm trong 10 giây.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">x = {4, 2, 0, 2}</span>, <span class="m">h = {0,5; 0,3; 0,2}</span> → <span class="m">y = {2; 2,2; 1,4; 1,4; 0,6; 0,4}</span>, <span class="m">Σy = 8 = 8 × 1,0</span> ✓</div>
+
+<h3>D2 · LCCDE: đọc hệ số, sơ đồ khối, đệ quy</h3>
+<ol class="steps">
+<li>Chuẩn hóa về <span class="m">Σ<sub>k</sub> a<sub>k</sub>y[n−k] = Σ<sub>m</sub> b<sub>m</sub>x[n−m]</span> với <span class="m">a<sub>0</sub> = 1</span>. Bậc <span class="m">N</span> là bậc cao nhất của <span class="m">y</span>, <span class="m">M</span> của <span class="m">x</span>.</li>
+<li>Code: <code>y = lfilter(b, a, x)</code> với <code>b = [b0, b1, …]</code>, <code>a = [1, a1, …]</code> — <b>giữ nguyên dấu</b> của <span class="m">a<sub>k</sub></span>.</li>
+<li>Dạng đệ quy để chạy tay: <span class="m">y[n] = −Σ<sub>k≥1</sub> a<sub>k</sub>y[n−k] + Σ<sub>m</sub> b<sub>m</sub>x[n−m]</span> (chuyển vế <b>đổi dấu</b>).</li>
+<li>Direct Form I: nhánh tiến <span class="m">b<sub>m</sub></span> qua các khâu <span class="m">z<sup>−1</sup></span> của <span class="m">x</span>, nhánh hồi tiếp <span class="m">−a<sub>k</sub></span> của <span class="m">y</span>, cộng tại một nút.</li>
+<li>FIR hay IIR: có hồi tiếp <span class="m">y[n−k]</span> là IIR. Giá trị xác lập lấy nhanh bằng <span class="m">H(1)</span>, không cần giải.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">y − 0,5y[n−1] = x + x[n−1]</span> → <code>lfilter([1,1],[1,-0.5],x)</code>; <span class="m">y = 1; 2,5; 3,25; 3,625; 3,8125</span> → <span class="m">y<sub>∞</sub> = H(1) = 2/0,5 = 4</span>.</div>
+
+<h3>D3 · Phương pháp cổ điển</h3>
+<ol class="steps">
+<li>Đặc trưng: thế <span class="m">y = λ<sup>n</sup></span> vào vế trái thuần nhất, chia <span class="m">λ<sup>n−N</sup></span> → đa thức bậc <span class="m">N</span>. Mọi <span class="m">|λ<sub>i</sub>| &lt; 1</span> thì ổn định.</li>
+<li><span class="m">y<sub>h</sub> = Σ A<sub>i</sub>λ<sub>i</sub><sup>n</sup></span> với nghiệm thực phân biệt.</li>
+<li><span class="m">y<sub>p</sub></span> theo dạng input: hằng → <span class="m">β</span>; <span class="m">λ<sub>0</sub><sup>n</sup></span> → <span class="m">Kλ<sub>0</sub><sup>n</sup></span>; <span class="m">n</span> → <span class="m">c<sub>1</sub>n + c<sub>0</sub></span>; sin/cos → <span class="m">c<sub>1</sub>cos + c<sub>2</sub>sin</span>.</li>
+<li><b>Hằng số <span class="m">A<sub>i</sub></span> tìm từ <span class="m">y[0], y[1], …</span> tính bằng đệ quy</b> từ điều kiện đầu — không thế thẳng <span class="m">y[−1]</span> vào công thức <span class="m">n ≥ 0</span>.</li>
+<li>Kiểm tra lại một điểm (<span class="m">n = 2</span>) bằng đệ quy.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">y − 0,7y[n−1] + 0,1y[n−2] = x</span>, <span class="m">x = 2u[n]</span>, <span class="m">y[−1] = 8</span>, <span class="m">y[−2] = −4</span> → <span class="m">λ = 0,5; 0,2</span>; <span class="m">y<sub>p</sub> = 5</span>; đệ quy <span class="m">y[0] = 8</span>, <span class="m">y[1] = 6,8</span> → <span class="m">A<sub>1</sub> = 4</span>, <span class="m">A<sub>2</sub> = −1</span> → <span class="m">y[n] = 5 + 4(0,5)<sup>n</sup> − (0,2)<sup>n</sup></span>. Kiểm tra <span class="m">y[2] = 5,96</span> hai cách ✓</div>
+<div class="box warn"><b>Bẫy cộng hưởng:</b> nếu input <b>trùng mode tự nhiên</b> (<span class="m">x = λ<sub>i</sub><sup>n</sup>u[n]</span>) thì <span class="m">y<sub>p</sub> = Kλ<sub>i</sub><sup>n</sup></span> cho vế trái bằng 0 → vô nghiệm. Phải <b>nhân thêm <span class="m">n</span></b>: <span class="m">y<sub>p</sub> = Knλ<sub>i</sub><sup>n</sup></span>. Số đã làm: <span class="m">y − 0,5y[n−1] = (0,5)<sup>n</sup>u[n]</span> → <span class="m">y[n] = (n+1)(0,5)<sup>n</sup></span>.</div>
+
+<h3>D4 · Zero-input / zero-state</h3>
+<div class="grid2">
+<div class="cell"><h4>Zero-input</h4><p>Cho <span class="m">x = 0</span>, giữ điều kiện đầu. Chỉ còn <span class="m">y<sub>h</sub></span>, hệ số lấy từ chính điều kiện đầu.</p></div>
+<div class="cell"><h4>Zero-state</h4><p>Cho điều kiện đầu bằng 0, giữ input. Giải như D3 với <span class="m">y[−1] = 0</span>.</p></div>
+</div>
+<p>Toàn phần là tổng hai phần. Luôn kiểm tra <span class="m">y[0]</span> bằng đệ quy gốc.</p>
+<div class="box key"><b>Số đã làm (EMA 0,8):</b> <span class="m">y[−1] = 50</span>, <span class="m">x = 100u[n]</span> → <span class="m">y<sub>zi</sub> = 40(0,8)<sup>n</sup></span>, <span class="m">y<sub>zs</sub> = 100 − 80(0,8)<sup>n</sup></span>, tổng <span class="m">y = 100 − 40(0,8)<sup>n</sup></span>. Đạt 95 rpm tại <span class="m">n = 10</span> (10 ms); <span class="m">τ = −T/ln 0,8 = 4,48</span> ms.</div>
+
+<h3>D5 · <span class="m">h[n]</span> và nghiệm phức</h3>
+<ol class="steps">
+<li>Cho <span class="m">x = δ[n]</span>, chạy đệ quy lấy vài mẫu đầu với nghỉ ban đầu.</li>
+<li>Nghiệm phức <span class="m">λ = re<sup>±jθ</sup></span>: viết <span class="m">h[n] = r<sup>n</sup>(C<sub>1</sub>cos θn + C<sub>2</sub>sin θn)u[n]</span>, tìm <span class="m">C<sub>1</sub>, C<sub>2</sub></span> từ <span class="m">h[0], h[1]</span>.</li>
+<li>Chu kỳ dao động <span class="m">N<sub>0</sub> = 2π/θ</span> mẫu → <span class="m">f = f<sub>s</sub>/N<sub>0</sub></span> Hz. Sau một chu kỳ biên độ nhân <span class="m">r<sup>N<sub>0</sub></sup></span>.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">y − y[n−1] + 0,5y[n−2] = x</span> → <span class="m">λ = 0,5 ± 0,5j = 0,7071e<sup>±jπ/4</sup></span>; <span class="m">N<sub>0</sub> = 8</span> mẫu → 125 Hz @ 1 kHz; mỗi chu kỳ biên độ còn <span class="m">r<sup>8</sup> = 1/16</span>.</div>
+</section>
+
+<section id="E">
+<h2><span class="ix">E</span>Đáp ứng tần số<span class="tag">Ch2 · slide 4–15</span></h2><div class="rule"></div>
+<p><b>Ví von:</b> hệ LTI như cái loa — không đẻ nốt mới, chỉ chỉnh <b>to/nhỏ</b> và <b>sớm/trễ</b> từng nốt.</p>
+<div class="eq">x[n] = e<sup>jωn</sup> ⟹ y[n] = H(e<sup>jω</sup>)e<sup>jωn</sup>,&nbsp;&nbsp;&nbsp; H(e<sup>jω</sup>) = Σ<sub>k</sub> h[k]e<sup>−jωk</sup></div>
+
+<h3>E1 · Đáp ứng với sin</h3>
+<p><span class="m">y = A|H(e<sup>jω<sub>0</sub></sup>)|cos(ω<sub>0</sub>n + φ + ∠H)</span>: <b>biên độ nhân, pha cộng</b>. Quy trình: đổi <span class="m">f → ω = 2πf/f<sub>s</sub></span> → thay <span class="m">z = e<sup>jω</sup></span> vào <span class="m">H</span> → lấy module và góc → đổi dB bằng <span class="m">20 lg|H|</span>.</p>
+<div class="box key"><b>Số đã làm (EMA <span class="m">α = 0,9048</span> @ 50 Hz):</b> <span class="m">ω = 0,1π</span>; <span class="m">1 − αe<sup>−jω</sup> = 0,13944 + j0,27961</span>, module 0,31245 → <span class="m">|H| = 0,3046</span> → <b>−10,33 dB</b>, pha <span class="m">−63,5°</span>. DC: <span class="m">H(1) = 1</span> = 0 dB.</div>
+
+<h3>E2 · Trung bình trượt M mẫu</h3>
+<div class="eq">H = sin(ωM/2) / [M sin(ω/2)] · e<sup>−jω(M−1)/2</sup></div>
+<p>Zero tại <span class="m">ω = 2πk/M</span>, tức <span class="m">f = kf<sub>s</sub>/M</span>. Trễ <span class="m">(M−1)/2</span> mẫu, <b>bằng nhau ở mọi tần số</b> (pha tuyến tính).</p>
+<div class="box key"><b>Số đã làm:</b> <span class="m">f<sub>s</sub> = 1</span> kHz, <span class="m">M = 20</span> → triệt 50, 100, 150 Hz… đúng nhiễu lưới, trễ 9,5 mẫu. <span class="m">M = 4</span> @ 250 Hz → <span class="m">H = 0</span>, đúng zero đầu <span class="m">f<sub>s</sub>/M</span>.</div>
+
+<h3>E3 · Trễ pha vs trễ nhóm</h3>
+<div class="eq">τ<sub>pd</sub> = −∠H/ω&nbsp;&nbsp;(một sóng sin) &nbsp;&nbsp;·&nbsp;&nbsp; τ<sub>gd</sub> = −dΨ/dω&nbsp;&nbsp;(đường bao, Ψ đã gỡ cuộn)</div>
+<div class="box warn"><b>Bẫy hay thi:</b> <span class="m">|H| = 1</span> ở mọi tần <b>không đủ</b> để kết luận không méo. Pha hằng <span class="m">−90°</span> và pha cong đều làm méo dạng sóng; phải thêm điều kiện <b>pha tuyến tính</b>. Ví dụ <span class="m">H = e<sup>−j3ω</sup></span> → <span class="m">τ<sub>pd</sub> = τ<sub>gd</sub> = 3</span> (không méo); <span class="m">H = e<sup>−jπ/2</sup></span> → <span class="m">τ<sub>pd</sub> = (π/2)/ω</span> phụ thuộc <span class="m">ω</span> (méo), <span class="m">τ<sub>gd</sub> = 0</span>.</div>
+<div class="box tip">EMA <span class="m">a = 0,905</span> có <span class="m">τ<sub>gd</sub>(0) = a/(1−a) = 9,5</span> mẫu — <b>bằng MA M = 20</b> nhưng chỉ ở tần thấp; tần cao trễ khác nên méo transient. FIR pha tuyến tính trễ đều, IIR rẻ hơn nhưng trễ nhóm cong.</div>
+</section>
+
+<section id="F">
+<h2><span class="ix">F</span>Biến đổi Z<span class="tag">ROC · PFE · thiết kế</span></h2><div class="rule"></div>
+<p><b>Ví von:</b> DTFT là cái cân chỉ cân được đồ nhẹ; Z là cân có núm chỉnh <span class="m">r<sup>−n</sup></span> để cân cả đồ nặng. Vặn núm về <span class="m">r = 1</span> thì Z thành DTFT.</p>
+
+<h3>F1 · <span class="m">H(z)</span>, cực/zero, ROC, ổn định</h3>
+<ol class="steps">
+<li>Từ LCCDE đọc thẳng <span class="m">H(z) = Σb<sub>k</sub>z<sup>−k</sup> / Σa<sub>k</sub>z<sup>−k</sup></span>; nhân chéo là ra lại phương trình sai phân.</li>
+<li>Nhân tử hóa: zero <span class="m">c<sub>k</sub></span> là nghiệm tử, cực <span class="m">d<sub>k</sub></span> là nghiệm mẫu — chính là <span class="m">λ</span> ở Ch1. Nên quy về dạng theo <span class="m">z</span> để đếm đúng zero tại gốc.</li>
+<li>ROC: nhân quả → <span class="m">|z| &gt; max|d<sub>k</sub>|</span>; dãy trái → <span class="m">|z| &lt; min|d<sub>k</sub>|</span>; hai phía → vành khuyên. <b>ROC không bao giờ chứa cực.</b></li>
+<li><b>Nhân quả + ổn định khi và chỉ khi mọi <span class="m">|d<sub>k</sub>| &lt; 1</span>.</b> Zero nằm đâu cũng được.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">H = 0,2z<sup>−1</sup>/[(1−0,8z<sup>−1</sup>)(1−z<sup>−1</sup>)] = 0,2z/[(z−0,8)(z−1)]</span>: zero <span class="m">z = 0</span>, cực 0,8 và 1, ROC <span class="m">|z| &gt; 1</span> → <b>không BIBO</b> vì ROC không chứa <span class="m">|z| = 1</span>. Và <span class="m">y − 2,5y[n−1] + y[n−2] = x</span> (cực ½ và 2) cho <b>ba hệ khác nhau</b> theo ba ROC.</div>
+
+<h3>F2 · PFE và Z ngược</h3>
+<ol class="steps">
+<li>Viết theo <span class="m">z<sup>−1</sup></span>. Bậc tử lớn hơn hoặc bằng bậc mẫu thì <b>chia đa thức trước</b> lấy các <span class="m">B<sub>r</sub>z<sup>−r</sup></span> (thành <span class="m">δ</span>).</li>
+<li><span class="m">A<sub>k</sub> = [(1 − d<sub>k</sub>z<sup>−1</sup>)X(z)]</span> tại <span class="m">z = d<sub>k</sub></span> — che thừa số đó đi rồi thế.</li>
+<li>Cực lặp bậc <span class="m">s</span>: thêm <span class="m">C<sub>m</sub>/(1 − d<sub>i</sub>z<sup>−1</sup>)<sup>m</sup></span>; với <span class="m">s = 2</span> dùng <span class="m">Ψ = (1 − d<sub>i</sub>z<sup>−1</sup>)<sup>2</sup>X</span>, rồi <span class="m">C<sub>2</sub> = Ψ</span>, <span class="m">C<sub>1</sub> = −dΨ/dw</span> tại đó.</li>
+<li>Tra bảng <b>theo ROC</b>: <span class="m">|z| &gt; |d<sub>k</sub>|</span> → <span class="m">A<sub>k</sub>d<sub>k</sub><sup>n</sup>u[n]</span>; <span class="m">|z| &lt; |d<sub>k</sub>|</span> → <span class="m">−A<sub>k</sub>d<sub>k</sub><sup>n</sup>u[−n−1]</span>.</li>
+<li>Kiểm tra 5 giây: <span class="m">x[0] = lim<sub>z→∞</sub> X(z)</span>; giá trị cuối <span class="m">lim<sub>z→1</sub>(1 − z<sup>−1</sup>)X(z)</span>.</li>
+</ol>
+<div class="box key"><b>Số đã làm (đáp ứng bước EMA):</b> <span class="m">A<sub>α</sub> = −α</span>, <span class="m">A<sub>1</sub> = 1</span> → <span class="m">y[n] = (1 − α<sup>n+1</sup>)u[n]</span>. Đạt 95%: <span class="m">α<sup>n+1</sup> ≤ 0,05</span> → <span class="m">n + 1 ≥ ln 0,05 / ln α = 29,96</span> → <b>n = 29</b> (29 ms ≈ <span class="m">3τ</span>).</div>
+<div class="box tip"><b>Cặp phải thuộc:</b> <span class="m">δ ↔ 1</span>; <span class="m">a<sup>n</sup>u[n] ↔ 1/(1 − az<sup>−1</sup>)</span>; <span class="m">na<sup>n</sup>u[n] ↔ az<sup>−1</sup>/(1 − az<sup>−1</sup>)<sup>2</sup></span>; <span class="m">1/(1 − z<sup>−1</sup>)<sup>2</sup> ↔ (n+1)u[n]</span>; dãy hữu hạn <span class="m">(1 − a<sup>N</sup>z<sup>−N</sup>)/(1 − az<sup>−1</sup>)</span> với zero triệt cực tại <span class="m">a</span>, ROC <span class="m">z ≠ 0</span>.</div>
+
+<h3>F3 · <span class="m">z = e<sup>sT</sup></span> và thiết kế notch</h3>
+<ol class="steps">
+<li>Cực liên tục <span class="m">s = −ζω<sub>0</sub> ± jω<sub>0</sub>√(1−ζ<sup>2</sup>)</span> → <span class="m">r = e<sup>−ζω<sub>0</sub>T</sup></span>, <span class="m">θ = ω<sub>0</sub>√(1−ζ<sup>2</sup>)·T</span>.</li>
+<li>Notch: <b>zero trên</b> vòng đơn vị tại <span class="m">θ = 2πf<sub>0</sub>/f<sub>s</sub></span> → tử <span class="m">1 − 2cos θ·z<sup>−1</sup> + z<sup>−2</sup></span>; <b>cực cùng góc</b> bán kính <span class="m">ρ</span> → mẫu <span class="m">1 − 2ρcos θ·z<sup>−1</sup> + ρ<sup>2</sup>z<sup>−2</sup></span>.</li>
+<li>Chuẩn hóa <span class="m">H(1) = 1</span>: <span class="m">K = (1 − 2ρcos θ + ρ<sup>2</sup>)/(2 − 2cos θ)</span>.</li>
+<li>Bề rộng dải chặn xấp xỉ <span class="m">2(1−ρ)</span> rad/mẫu, tức <span class="m">2(1−ρ)f<sub>s</sub>/2π</span> Hz.</li>
+</ol>
+<div class="box key"><b>Số đã làm:</b> <span class="m">f<sub>0</sub> = 120</span> Hz, <span class="m">ζ = 0,05</span>, <span class="m">f<sub>s</sub> = 1</span> kHz → cực khung <span class="m">0,9630 ∠ ±43,15°</span>. Notch <span class="m">ρ = 0,9</span>: <span class="m">θ = 43,2°</span>, <span class="m">cos θ = 0,72897</span>, <span class="m">K = 0,91845</span>, <span class="m">b = [0,91845; −1,33904; 0,91845]</span>, <span class="m">a = [1; −1,31214; 0,81]</span>. <span class="m">|H|</span> tại 120 Hz bằng 0; còn 0,978 tại 60 Hz và 0,996 tại 200 Hz. Dải chặn 32,5 / 16,1 / 6,4 Hz ứng với <span class="m">ρ = 0,9 / 0,95 / 0,98</span>.</div>
+<div class="box warn"><b>Đánh đổi <span class="m">ρ</span>:</b> <span class="m">ρ</span> lớn cho notch hẹp, ít méo pha trong băng servo nên giữ được phase margin. Nhược điểm: rất nhạy khi <span class="m">f<sub>0</sub></span> trôi theo tải và nhiệt độ, transient tắt chậm theo <span class="m">1/(1−ρ)</span>, và nhạy sai số lượng tử hệ số khi chạy fixed-point.</div>
+
+<h3>F4 · Cực tại <span class="m">z = 1</span> và cực lặp</h3>
+<p>Cực tại <span class="m">z = 1</span> là khâu tích phân, tức <b>không BIBO</b>. Hệ quả dây chuyền:</p>
+<ul class="tight">
+<li>Xung vào → <span class="m">h[n]</span> tiến tới <b>hằng số</b> không tắt → vị trí dời rồi đứng yên.</li>
+<li>Bước vào → cực lặp bậc 2 tại <span class="m">z = 1</span> → sinh số hạng <span class="m">n</span> → <b>đáp ứng dốc</b> tăng mãi.</li>
+</ul>
+<div class="box key"><b>Số đã làm:</b> xung: <span class="m">p[n] = 0,2[5 − 4(0,8)<sup>n−1</sup>]u[n−1] → p<sub>∞</sub> = 1,0</span>. Bước: <span class="m">p[n] = [(n−4) + 4(0,8)<sup>n</sup>]u[n]</span> — dốc 1 đơn vị/mẫu, lệch gốc <span class="m">−4</span> mẫu. Đáp ứng bước là tổng tích lũy của đáp ứng xung; vì <span class="m">h</span> không tắt nên tổng tăng vô hạn.</div>
+</section>
+
+<section>
+<h2>Bảng công thức mang vào phòng thi</h2><div class="rule"></div>
+<div class="scroll"><table>
+<tr><th style="width:20%">Chủ đề</th><th style="width:44%">Công thức</th><th>Nhớ</th></tr>
+<tr><td>Lấy mẫu</td><td><span class="m">ω = 2πf/f<sub>s</sub></span>; <span class="m">f<sub>s,min</sub> = 2f<sub>max</sub></span>; <span class="m">f<sub>a</sub> = |f − kf<sub>s</sub>|</span></td><td>alias xảy ra <b>lúc lấy mẫu</b>, lọc sau vô ích</td></tr>
+<tr><td>Chu kỳ dãy</td><td>tuần hoàn khi <span class="m">f/f<sub>s</sub> = k/N</span> hữu tỉ → chu kỳ <span class="m">N</span></td><td>nhiều thành phần lấy BCNN</td></tr>
+<tr><td>DAC</td><td><span class="m">Δ = V<sub>ref</sub>/2<sup>N</sup></span>; <span class="m">D = round(V·2<sup>N</sup>/V<sub>ref</sub>)</span>; <span class="m">|e| ≤ Δ/2</span></td><td>ảnh phổ <span class="m">|kf<sub>s</sub> ± f<sub>0</sub>|</span>; <span class="m">f<sub>0</sub> &lt; f<sub>c</sub> &lt; f<sub>s</sub> − f<sub>0</sub></span></td></tr>
+<tr><td>Tích chập</td><td><span class="m">y = Σ<sub>k</sub> x[k]h[n−k]</span>; dài <span class="m">N<sub>x</sub> + N<sub>h</sub> − 1</span></td><td>kiểm tra <span class="m">Σy = Σx · Σh</span></td></tr>
+<tr><td>LCCDE</td><td><span class="m">y[n] = −Σ<sub>k≥1</sub> a<sub>k</sub>y[n−k] + Σ<sub>m</sub> b<sub>m</sub>x[n−m]</span></td><td>chuyển vế đổi dấu; <span class="m">y<sub>∞</sub> = H(1)</span></td></tr>
+<tr><td>Nghiệm cổ điển</td><td><span class="m">y = y<sub>h</sub> + y<sub>p</sub></span>; input trùng mode thì nhân thêm <span class="m">n</span></td><td>hệ số từ <span class="m">y[0], y[1]</span> tính bằng đệ quy</td></tr>
+<tr><td>EMA</td><td><span class="m">α = e<sup>−T/τ</sup></span>; <span class="m">τ<sub>gd</sub>(0) = α/(1−α)</span>; bước <span class="m">= 1 − α<sup>n+1</sup></span></td><td>95% ứng với khoảng <span class="m">3τ</span></td></tr>
+<tr><td>Đáp ứng tần số</td><td><span class="m">H(e<sup>jω</sup>) = Σh[k]e<sup>−jωk</sup></span>; <span class="m">y = A|H|cos(ω<sub>0</sub>n + φ + ∠H)</span></td><td>biên độ nhân, pha cộng</td></tr>
+<tr><td>Trễ</td><td><span class="m">τ<sub>pd</sub> = −∠H/ω</span>; <span class="m">τ<sub>gd</sub> = −dΨ/dω</span></td><td>pha tuyến tính thì không méo</td></tr>
+<tr><td>Biến đổi Z</td><td><span class="m">X(z) = Σx[n]z<sup>−n</sup></span>; <span class="m">z = e<sup>jω</sup></span> cho DTFT</td><td><b>luôn ghi kèm ROC</b></td></tr>
+<tr><td>PFE</td><td><span class="m">A<sub>k</sub> = [(1 − d<sub>k</sub>z<sup>−1</sup>)X]</span> tại <span class="m">z = d<sub>k</sub></span>; <span class="m">x[0] = lim<sub>z→∞</sub> X</span></td><td>chọn phải/trái theo ROC</td></tr>
+<tr><td>Ổn định</td><td>nhân quả + ổn định khi mọi <span class="m">|cực| &lt; 1</span></td><td>cực trên vòng đơn vị là tích phân, không BIBO</td></tr>
+<tr><td><span class="m">s → z</span></td><td><span class="m">z = e<sup>sT</sup></span>: <span class="m">r = e<sup>−ζω<sub>0</sub>T</sup></span>, <span class="m">θ = ω<sub>d</sub>T</span></td><td>nửa trái <span class="m">s</span> vào trong vòng đơn vị</td></tr>
+</table></div>
+</section>
+
+<section>
+<h2>15 bẫy đã gặp</h2><div class="rule"></div>
+<p class="lead">Đọc lại mục này 10 phút trước khi vào phòng thi.</p>
+<ol class="steps">
+<li>Quên <b>ghi ROC</b> kèm biến đổi Z — mất điểm dù kết quả đúng.</li>
+<li>Kết luận “không ổn định” mà không chỉ ra input bị chặn cụ thể; hoặc kết luận ✗ mà thiếu phản ví dụ <b>bằng số</b>.</li>
+<li>Nhầm <b>tuyến tính</b> với <b>bất biến</b>: <span class="m">n·x[n]</span> tuyến tính nhưng không TI.</li>
+<li>Quên rằng <span class="m">x(t)</span> tuần hoàn <b>không</b> suy ra <span class="m">x[n]</span> tuần hoàn.</li>
+<li>Thế thẳng <span class="m">y[−1]</span> vào công thức nghiệm <span class="m">n ≥ 0</span> thay vì tính <span class="m">y[0], y[1]</span> bằng đệ quy trước.</li>
+<li>Input trùng mode tự nhiên mà vẫn thử <span class="m">y<sub>p</sub> = Kλ<sup>n</sup></span> → vô nghiệm; phải nhân <span class="m">n</span>.</li>
+<li>Chuyển vế LCCDE mà <b>quên đổi dấu</b> <span class="m">a<sub>k</sub></span>, hoặc truyền sai dấu vào <code>lfilter</code>.</li>
+<li>Lấy <span class="m">|H| = 1</span> để kết luận không méo, thiếu điều kiện pha tuyến tính.</li>
+<li>Đạo hàm pha <b>chưa gỡ cuộn</b> khi tính trễ nhóm.</li>
+<li>Nhầm zero đầu tiên của MA (<span class="m">f<sub>s</sub>/M</span>) với tần cắt −3 dB.</li>
+<li>Tưởng lọc số sau ADC gỡ được alias — phải lọc analog <b>trước</b> ADC hoặc tăng <span class="m">f<sub>s</sub></span>.</li>
+<li>Đáp án ROC <b>chứa một cực</b> là sai chắc chắn.</li>
+<li>Quên chia đa thức khi bậc tử lớn hơn hoặc bằng bậc mẫu trong PFE.</li>
+<li>Cực lặp mà quên số hạng đạo hàm <span class="m">C<sub>1</sub></span>, chỉ lấy <span class="m">C<sub>2</sub></span>.</li>
+<li>Hoán vị thứ tự hai khối nối tiếp khi một khối <b>phi tuyến</b> (bão hòa) — chỉ LTI mới giao hoán.</li>
+</ol>
+</section>
+
+<section>
+<h2>Tự kiểm tra 12 câu</h2><div class="rule"></div>
+<details><summary>1 · <span class="m">f = 7</span> kHz, <span class="m">f<sub>s</sub> = 10</span> kHz, tín hiệu hiện ở đâu?</summary><p><span class="m">k = round(0,7) = 1</span> → <span class="m">f<sub>a</sub> = |7 − 10| = 3</span> kHz, đè lên 3 kHz thật, không tách được.</p></details>
+<details><summary>2 · <span class="m">x[n] = 4cos(0,3πn + π/6)</span> có tuần hoàn không?</summary><p>Có: <span class="m">0,3π/2π = 3/20</span> hữu tỉ → <span class="m">N = 20</span> mẫu.</p></details>
+<details><summary>3 · DAC 8 bit, <span class="m">V<sub>ref</sub> = 5</span> V, 600 v/p mỗi V — một LSB bằng bao nhiêu vòng/phút?</summary><p><span class="m">Δ = 5/256 = 19,5</span> mV → <span class="m">600 × 0,0195 = 11,7</span> vòng/phút.</p></details>
+<details><summary>4 · Hệ <span class="m">y[n] = n·x[n]</span>: tuyến tính? bất biến? ổn định?</summary><p>Tuyến tính ✓ vì hệ số <span class="m">n</span> không phá xếp chồng; bất biến ✗ vì dịch input thì <span class="m">n</span> không dịch theo; ổn định ✗ vì <span class="m">x = u[n] → y = n</span>.</p></details>
+<details><summary>5 · Vì sao trung bình tích lũy ổn định còn bộ tích lũy thì không?</summary><p>Hệ số <span class="m">1/(n+1)</span> chia đúng số hạng đang cộng nên <span class="m">|y| ≤ B<sub>x</sub></span>; bộ tích lũy cộng mãi, <span class="m">x = u[n] → y = n+1</span>.</p></details>
+<details><summary>6 · Sai phân lùi có khả nghịch không? Liên hệ gì tới encoder?</summary><p>Không — <span class="m">x</span> và <span class="m">x + C</span> cho cùng output. Encoder tương đối cũng mất vị trí tuyệt đối nên phải homing. Nếu giới hạn <span class="m">x[n] = 0, n &lt; 0</span> thì hệ ngược là bộ tích lũy.</p></details>
+<details><summary>7 · Kiểm tra tích chập trong 10 giây bằng cách nào?</summary><p><span class="m">Σy = (Σx)(Σh)</span>, chính là <span class="m">Y(1) = X(1)H(1)</span>.</p></details>
+<details><summary>8 · <span class="m">λ = 0,5 ± 0,5j</span> ở <span class="m">f<sub>s</sub> = 1</span> kHz dao động tần số nào?</summary><p><span class="m">r = 0,7071</span>, <span class="m">θ = π/4</span> → <span class="m">N<sub>0</sub> = 8</span> mẫu → <span class="m">f = 125</span> Hz; mỗi chu kỳ biên độ còn <span class="m">r<sup>8</sup> = 1/16</span>.</p></details>
+<details><summary>9 · <span class="m">|H| = 1</span> mọi tần số thì có méo dạng sóng không?</summary><p>Chưa chắc. Pha hằng <span class="m">−90°</span> hoặc pha cong vẫn méo. Cần thêm pha tuyến tính.</p></details>
+<details><summary>10 · Cùng <span class="m">X(z) = 1/(1 − az<sup>−1</sup>)</span>, hai ROC cho hai dãy nào?</summary><p><span class="m">|z| &gt; |a|</span>: <span class="m">a<sup>n</sup>u[n]</span> (phải). <span class="m">|z| &lt; |a|</span>: <span class="m">−a<sup>n</sup>u[−n−1]</span> (trái). Nên Z phải kèm ROC.</p></details>
+<details><summary>11 · Notch: tại sao zero đặt trên vòng đơn vị còn cực thì không?</summary><p>Zero trên vòng đơn vị cho <span class="m">H(e<sup>jθ</sup>) = 0</span> đúng tần số cần triệt; cực ở <span class="m">ρ &lt; 1</span> cùng góc để kéo đáp ứng về 1 ở hai bên, làm notch hẹp và giữ hệ ổn định.</p></details>
+<details><summary>12 · Hệ có cực tại <span class="m">z = 1</span>, vào là bước — đáp ứng dạng gì?</summary><p>Cực lặp bậc 2 tại <span class="m">z = 1</span> sinh số hạng <span class="m">n</span> → đáp ứng dốc tuyến tính, tăng vô hạn. Đây là biểu hiện không ổn định BIBO.</p></details>
+</section>
+
+<section>
+<h2>Checklist 30 phút cuối</h2><div class="rule"></div>
+<ul class="tight">
+<li>Đọc lại <b>15 bẫy</b> và <b>bảng công thức</b> — đúng hai mục này là đủ.</li>
+<li>Nhẩm bốn con số neo: <span class="m">α = e<sup>−T/τ</sup></span>, 95% ứng với <span class="m">3τ</span>, <span class="m">f<sub>a</sub> = |f − kf<sub>s</sub>|</span>, mọi <span class="m">|cực| &lt; 1</span>.</li>
+<li>Vào phòng thi viết ngay lên nháp: 6 câu hỏi kiểm tra tính chất, bảng cặp Z, quy trình PFE 5 bước.</li>
+<li>Mỗi bài xong <b>kiểm tra chéo một lần</b>: tổng tích chập, <span class="m">x[0] = lim X(z)</span>, hoặc đệ quy một điểm.</li>
+</ul>
+</section>
+
+</div>
+</body>
+</html>
